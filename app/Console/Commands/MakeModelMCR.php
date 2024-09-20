@@ -31,24 +31,25 @@ class MakeModelMCR extends Command
         // Iterate over the options
         foreach ($this->allowedOptions as $option) {
             if (in_array($option, $options)) {
-                if ($option === 'r' && in_array('c', $options)) {
-                    // Create a resource controller
-                    $this->call('make:c2', [
-                        'user' => $type, // Pass the type as user
-                        'name' => $name . 'Controller',
-                        '--resource' => true,
-                        '--model' => $name,
-                    ]);
+                if ($option === 'c') {
+                    if (in_array('r', $options)){
+                        // Create a resource controller
+                        $this->call('make:c2', [
+                            'user' => $type, // Pass the type as user
+                            'name' => $name . 'Controller',
+                            '--resource' => true,
+                            '--model' => $name,
+                        ]);
+                    } else {
+                        $this->call('make:c', [
+                            'name' => $name . 'Controller',
+                            'user' => $type, // Pass the type as user
+                        ]);
+                    }
                 } elseif ($option === 'm') {
                     // Create a migration
                     $this->call('make:migration', [
                         'name' => 'create_' . strtolower(Str::plural($name)) . '_table',
-                    ]);
-                } elseif ($option === 'c') {
-                    // Create a basic controller
-                    $this->call('make:c', [
-                        'name' => $name . 'Controller',
-                        'user' => $type, // Pass the type as user
                     ]);
                 }
             }
