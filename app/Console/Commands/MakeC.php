@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Routing\Console\ControllerMakeCommand;
 
-class MakeCController extends ControllerMakeCommand
+class MakeC extends ControllerMakeCommand
 {
     protected $name = 'make:c';
     protected $description = 'Create a new controller that extends AppController';

@@ -26,7 +26,9 @@ class Kernel extends ConsoleKernel
     }
     protected $commands = [
         \App\Console\Commands\MakeModelMCR::class,
-        \App\Console\Commands\MakeCController::class,
+        \App\Console\Commands\MakeC::class,
+        \App\Console\Commands\MakeC2::class,
+        \App\Console\Commands\CustomMakeModel::class,
     ];
     
 }
