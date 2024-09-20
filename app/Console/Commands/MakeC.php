@@ -6,7 +6,7 @@ use Illuminate\Routing\Console\ControllerMakeCommand;
 
 class MakeC extends ControllerMakeCommand
 {
-    protected $name = 'make:c {user}';
+    protected $name = 'make:c {name} {user}';
     protected $description = 'Create a new controller that extends AppController';
     protected $type = 'Controller';
 
