@@ -6,17 +6,18 @@ use Illuminate\Console\Command;
 
 class CustomMakeModel extends Command
 {
-    protected $signature = 'make:model-custom {name}';
+    protected $signature = 'make:model-custom {name} {user}';
     protected $description = 'Create a model with a custom stub';
 
     public function handle()
     {
         $name = $this->argument('name');
-        $namespace = 'App\\Models'; // Adjust the namespace as needed
-        $stubPath = base_path('stubs/model.stub');
+        $type = $this->argument('user');
+        $namespace = 'App\\Models\\'.$type; // Adjust the namespace as needed
+        $stubPath = base_path("stubs/$type/model.stub");
 
         // Define the output path for the model
-        $modelPath = app_path("Models/{$name}.php");
+        $modelPath = app_path("Models/$type/$name.php");
 
         // Load the stub content
         $stub = file_get_contents($stubPath);

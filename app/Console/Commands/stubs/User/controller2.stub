@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace {{ namespace }};
 
-use Core\Controller\AppController;
+use Core\Controller\User\AppController;
 use Illuminate\Http\Request;
 
-class AdminController extends AppController
+class {{ class }} extends AppController
 {
     public function index()
     {
@@ -40,9 +40,5 @@ class AdminController extends AppController
     public function destroy($id)
     {
         // Remove the specified resource from storage
-    }
-
-    public function login(){
-        return view('admin.login');
     }
 }

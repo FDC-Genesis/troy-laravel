@@ -6,7 +6,7 @@ use Illuminate\Routing\Console\ControllerMakeCommand;
 
 class MakeC2 extends ControllerMakeCommand
 {
-    protected $name = 'make:c2';
+    protected $name = 'make:c2 {user}'; // Add user argument
     protected $description = 'Create a new controller that extends AppController';
     protected $type = 'Controller';
 
@@ -18,11 +18,14 @@ class MakeC2 extends ControllerMakeCommand
 
     protected function getStub()
     {
-        return __DIR__.'/stubs/controller2.stub';
+        // Get the user argument for the stub path
+        $user = $this->argument('user');
+        return __DIR__."/stubs/{$user}/controller2.stub"; // Adjust path based on user
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Controllers';
+        $user = $this->argument('user');
+        return $rootNamespace.'\Http\Controllers\\'.$user;
     }
 }
