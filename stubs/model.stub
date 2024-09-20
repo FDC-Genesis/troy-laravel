@@ -6,7 +6,5 @@ use Core\Model\AppModel;
 
 class {{ class }} extends AppModel
 {
-    protected $guarded = ['id'];
-
     // Add your additional properties and methods here
 }

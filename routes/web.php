@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', [UserController::class, 'login'])->name('login');
+
+Route::group(['middleware' => 'auth'], function () {
+    // Define resource routes for UserController
+    Route::resource('/', UserController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
+});
+
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'adminauth'], function () {
+    // Define resource routes for AdminController
+    Route::resource('/', AdminController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
 });
