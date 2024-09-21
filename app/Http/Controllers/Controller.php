@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -23,5 +24,17 @@ class Controller extends BaseController
         }
     
         return [$pluralizeModel, strtolower($modelName)];
+    }
+
+    protected function lastLogout($modelName){
+        $ucFirst = ucfirst($modelName);
+        $model = eval("new $ucFirst()");
+        $model->where('id', Auth::guard($modelName)->id())->update(['last_offline' => now()]);
+    }
+
+    protected function lastLoggedIn($modelName){
+        $ucFirst = ucfirst($modelName);
+        $model = eval("new $ucFirst()");
+        $model->where('id', Auth::guard($modelName)->id())->update(['last_online' => now()]);
     }
 }

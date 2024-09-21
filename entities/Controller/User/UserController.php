@@ -11,9 +11,7 @@ class UserController extends AppController
     public function index()
     {
         // Display a listing of the resource
-        $data = User::all();
-
-        dd($data);
+        return view("{ucfirst($this->singularizeModel)}.index");
     }
 
     public function create()
@@ -52,5 +50,9 @@ class UserController extends AppController
 
     public function login(){
         return view('User.login', ['type'=>$this->singularizeModel]);
+    }
+
+    public function logout(){
+        return parent::logout();
     }
 }

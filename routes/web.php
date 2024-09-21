@@ -36,3 +36,11 @@ Route::group($adminRoute['guest'], function () {
     Route::get('/signin', [AdminController::class, 'login'])->name('signin');
     Route::put('/signin', [AdminController::class, 'store'])->name('login');
 });
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+});
+
+Route::group(['prefix' => ''], function(){
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+});

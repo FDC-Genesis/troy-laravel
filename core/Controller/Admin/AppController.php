@@ -68,6 +68,7 @@ class AppController extends Controller
         // Attempt to log in the user
         if (Auth::guard($this->singularizeModel)->attempt(['email' => $request->email, 'password' => $request->password])) {
             // Authentication passed
+            $this->lastLoggedIn($this->singularizeModel);
             return redirect()->route('admin.index');
         } else {
             // Authentication failed
@@ -76,4 +77,8 @@ class AppController extends Controller
                 ->withInput(); // Preserve old input
         }
     }    
+    public function logout(){
+        Auth::guard($this->singularizeModel)->logout();
+        return redirect()->route("{$this->singularizeModel}.signin");
+    }
 }
