@@ -46,8 +46,8 @@ class CustomMakeModel extends Command
 
         // Replace the placeholders in the stub
         $modelContent = str_replace(
-            ['{{ namespace }}', '{{ type }}', '{{ class }}'],
-            ['Entities\\' . $this->argument('user') . '\\Model',  $this->argument('user'), $name],
+            ['{{ namespace }}', '{{ class }}'],
+            ['Entities\\Model', $name],
             $stubContent
         );
 
