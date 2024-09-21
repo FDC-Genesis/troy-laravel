@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AdminFactory extends Factory
 {
-    protected $model = Entities\Model\Admin::class;
+    protected $model = \Entities\Model\Admin::class;
 
     public function definition()
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
-    protected $model = Entities\Model\User::class;
+    protected $model = \Entities\Model\User::class;
 
     public function definition()
     {
