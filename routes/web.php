@@ -15,16 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$userRoute = config('route.user');
+$adminRoute = config('route.admin');
+
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
-Route::group(['middleware' => 'auth'], function () {
-    // Define resource routes for UserController
+Route::group($userRoute, function () {
     Route::resource('/', UserController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
 });
 
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'adminauth'], function () {
-    // Define resource routes for AdminController
+Route::group($adminRoute, function () {
     Route::resource('/', AdminController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
 });

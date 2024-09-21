@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\MakeC::class,
         \App\Console\Commands\MakeC2::class,
         \App\Console\Commands\CustomMakeModel::class,
+        \App\Console\Commands\MakeEntityFactory::class,
     ];
     
 }

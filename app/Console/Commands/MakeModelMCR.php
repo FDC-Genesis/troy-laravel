@@ -9,16 +9,20 @@ class MakeModelMCR extends Command
 {
     protected $signature = 'make:modelv2 {name} {options} {user}';
     protected $description = 'Create a model with migration and a resource controller using make:c';
-    private $allowedOptions = ['m', 'c', 'r'];
-    private $allowedTypes = ['User', 'Admin'];
+    private $allowedOptions = ['m', 'c', 'r', 'f'];
+    // private $allowedTypes = ['User', 'Admin'];
 
     public function handle()
     {
-        $user = ucfirst(strtolower($this->argument('user')));
-        if (!in_array($user, $this->allowedTypes)) {
-            $this->error('Invalid type. Please use either "User" or "Admin".');
-            return;
+        if (!$this->argument('user')){
+            $user = "User";
+        } else {
+            $user = ucfirst(strtolower($this->argument('user')));
         }
+        // if (!in_array($user, $this->allowedTypes)) {
+        //     $this->error('Invalid type. Please use either "User" or "Admin".');
+        //     return;
+        // }
 
         $name = $this->argument('name');
         $options = str_split(strtolower($this->argument('options')));
@@ -52,6 +56,10 @@ class MakeModelMCR extends Command
                     // Create a migration
                     $this->call('make:migration', [
                         'name' => 'create_' . strtolower(Str::plural($name)) . '_table',
+                    ]);
+                } else if ($option === 'f'){
+                    $this->call('make:entity-factory', [
+                        'name' => $name,
                     ]);
                 }
             }

@@ -3,6 +3,7 @@
 namespace Entities\Controller\User;
 
 use Core\Controller\User\AppController;
+use Entities\Model\User;
 use Illuminate\Http\Request;
 
 class UserController extends AppController
@@ -10,6 +11,9 @@ class UserController extends AppController
     public function index()
     {
         // Display a listing of the resource
+        $data = User::all();
+
+        dd($data);
     }
 
     public function create()

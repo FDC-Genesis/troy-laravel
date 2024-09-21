@@ -3,6 +3,7 @@
 namespace Entities\Controller\Admin;
 
 use Core\Controller\Admin\AppController;
+use Entities\Model\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends AppController
@@ -10,6 +11,9 @@ class AdminController extends AppController
     public function index()
     {
         // Display a listing of the resource
+        $admins = Admin::all();
+
+        dd($admins);
     }
 
     public function create()
@@ -40,5 +44,9 @@ class AdminController extends AppController
     public function destroy($id)
     {
         // Remove the specified resource from storage
+    }
+
+    public function login(){
+
     }
 }
