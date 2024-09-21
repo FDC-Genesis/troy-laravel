@@ -2,34 +2,46 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Routing\Console\ControllerMakeCommand;
+use Illuminate\Console\Command;
 
-class MakeC2 extends ControllerMakeCommand {
+class MakeC2 extends Command {
     protected $signature = 'make:controller-v3 {name} {user}';
     protected $description = 'Create a new controller version 3';
-    protected $type = 'Controller';
 
-    protected function getStub() {
-        return base_path('stubs/Controller/resource-controller.stub');
-    }
+    public function handle() {
+        ini_set('memory_limit', '4G'); // Increase memory limit here
 
-    protected function getPath($name) {
+        $name = $this->argument('name');
         $user = $this->argument('user');
-        return base_path("entities/{$user}/Controller/{$name}.php");
-    }
 
-    protected function buildClass($name) {
+        // Get the path where the file will be saved
+        $path = base_path("entities/{$user}/Controller/{$name}.php");
+        $path2 = "entities/{$user}/Controller/{$name}.php";
+        // Ensure the directory exists
+        $directory = dirname($path);
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true); // Create the directory if it doesn't exist
+        }
+
+        // Build the class content
         $controllerClass = class_basename($name);
-        $controllerNamespace = 'Entities\\' . $this->argument('user') . '\\Controller';
-        $stub = $this->files->get($this->getStub());
+        $controllerNamespace = "Entities\\{$user}\\Controller"; // Correct namespace
+        $stub = file_get_contents(base_path('stubs/Controller/resource-controller.stub'));
 
+        // Replace placeholders in the stub
         $replace = [
             '{{ namespace }}' => $controllerNamespace,
             '{{ class }}' => $controllerClass,
-            '{{ extends }}' => "Core\\Controller\\{$this->argument('user')}\\AppController",
+            '{{ extends }}' => "Core\\Controller\\{$user}\\AppController", // Base class
         ];
 
-        return str_replace(array_keys($replace), array_values($replace), $stub);
+        $content = str_replace(array_keys($replace), array_values($replace), $stub);
+
+        // Save the content to the specified path using native PHP
+        if (file_put_contents($path, $content) !== false) {
+            $this->info("Controller created successfully at: {$path2}");
+        } else {
+            $this->error("Failed to create controller.");
+        }
     }
-    
 }
