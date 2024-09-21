@@ -26,7 +26,8 @@
             "Core\\": "core/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Entities\\": "entities"
+            "Entities\\": "entities/",
+            "Libraries\\": "libraries/"
         }
     },
     "autoload-dev": {

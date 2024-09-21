@@ -1,5 +1,8 @@
 <?php
 
+use Entities\Model\Admin;
+use Entities\Model\User;
+
 return [
 
     /*
@@ -40,6 +43,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -62,7 +73,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Admin::class,
         ],
 
         // 'users' => [
@@ -94,6 +109,12 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins', // Make sure you have this provider defined
+            'table' => 'password_reset_tokens', // or a separate table if desired
             'expire' => 60,
             'throttle' => 60,
         ],

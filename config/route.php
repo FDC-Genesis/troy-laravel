@@ -2,10 +2,27 @@
 
 return [
     'user' => [
-        // 'middleware' => 'auth'
+        'guest' => [
+            'prefix' => '',
+            'middleware' => 'guestuser',
+            'as' => 'user.',
+        ],
+        'auth' => [
+            'prefix' => '',
+            'middleware' => 'userauth',
+            'as' => 'user.',
+        ]
     ],
     'admin' => [
-        'prefix' => 'admin', 
-        // 'middleware' => 'adminauth'
+        'guest' => [
+            'prefix' => 'admin', 
+            'middleware' => 'guestadmin',
+            'as' => 'admin.',
+        ],
+        'auth' => [
+            'prefix' => 'admin', 
+            'middleware' => 'adminauth',
+            'as' => 'admin.',
+        ]
     ]
 ];

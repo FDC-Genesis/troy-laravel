@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminAuth
+class UserAuth
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('admin')->check()) {
-            return redirect(route('admin.signin'));
+        if (!Auth::guard('user')->check()) {
+            return redirect(route('user.signin'));
         }
 
         return $next($request);

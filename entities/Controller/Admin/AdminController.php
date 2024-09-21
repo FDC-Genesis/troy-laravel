@@ -19,13 +19,17 @@ class AdminController extends AppController
     public function create()
     {
         // Show the form for creating a new resource
+        return view('Admin.register');
     }
 
-    public function store(Request $request)
-    {
-        // Store a newly created resource in storage
+    public function store(Request $request) {
+        if ($request->isMethod('post')){
+            // Attempt to authenticate the user
+            return $this->handleRegister($request);
+        } else if ($request->isMethod('put')){
+            return $this->handleLogin($request);
+        }
     }
-
     public function show($id)
     {
         // Display the specified resource
@@ -48,5 +52,7 @@ class AdminController extends AppController
 
     public function login(){
 
+        return view('Admin.login');
     }
+
 }

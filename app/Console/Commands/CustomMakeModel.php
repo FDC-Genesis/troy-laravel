@@ -7,14 +7,13 @@ use Illuminate\Support\Facades\File;
 
 class CustomMakeModel extends Command
 {
-    protected $signature = 'make:model-custom {name} {user}';
+    protected $signature = 'make:model-custom {name}';
     protected $description = 'Create a model with a custom stub';
 
     public function handle()
     {
         // Get the arguments
         $name = $this->argument('name');
-        $user = $this->argument('user');
 
         // Define the path where the model will be saved
         $path = base_path("entities/Model/{$name}.php");

@@ -2,6 +2,7 @@
 
 use Entities\Controller\Admin\AdminController;
 use Entities\Controller\User\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,21 @@ use Illuminate\Support\Facades\Route;
 $userRoute = config('route.user');
 $adminRoute = config('route.admin');
 
-Route::get('/login', [UserController::class, 'login'])->name('login');
-
-Route::group($userRoute, function () {
-    Route::resource('/', UserController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
+Route::group($userRoute['auth'], function () {
+    Route::resource('/', UserController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
+});
+Route::group($userRoute['guest'], function () {
+    Route::resource('/', UserController::class)->only(['store', 'create']);
+    Route::get('/signin', [UserController::class, 'login'])->name('signin');
+    Route::put('/signin', [UserController::class, 'store'])->name('login');
 });
 
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::group($adminRoute['auth'], function () {
+    Route::resource('/', AdminController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
+});
 
-Route::group($adminRoute, function () {
-    Route::resource('/', AdminController::class)->only(['index', 'store', 'create', 'show', 'edit', 'update', 'destroy']);
+Route::group($adminRoute['guest'], function () {
+    Route::resource('/', AdminController::class)->only(['store', 'create']);
+    Route::get('/signin', [AdminController::class, 'login'])->name('signin');
+    Route::put('/signin', [AdminController::class, 'store'])->name('login');
 });

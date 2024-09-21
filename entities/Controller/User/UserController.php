@@ -45,4 +45,8 @@ class UserController extends AppController
     {
         // Remove the specified resource from storage
     }
+
+    public function login(){
+        return view('User.login');
+    }
 }
