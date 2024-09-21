@@ -2,7 +2,6 @@
 
 use Entities\Controller\Admin\AdminController;
 use Entities\Controller\User\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

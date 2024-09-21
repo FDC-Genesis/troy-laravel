@@ -21,9 +21,13 @@ class UserController extends AppController
         return view('User.register', ['type'=>$this->singularizeModel]);
     }
 
-    public function store(Request $request)
-    {
-        // Store a newly created resource in storage
+    public function store(Request $request) {
+        if ($request->isMethod('post')){
+            // Attempt to authenticate the user
+            return $this->handleRegister($request);
+        } else if ($request->isMethod('put')){
+            return $this->handleLogin($request);
+        }
     }
 
     public function show($id)

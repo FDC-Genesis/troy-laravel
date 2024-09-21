@@ -42,12 +42,12 @@ class AppController extends Controller
         $data['password'] = Hash::make($request->password);
         unset($data['password_confirmation']);
 
-        $admin = $this->modelUsed::create($data);
+        $user = $this->modelUsed::create($data);
 
-        if ($admin) {
-            return redirect()->route('admin.login')->with('success', 'User registered successfully.');
+        if ($user) {
+            return redirect()->route('user.login')->with('success', 'User registered successfully.');
         } else {
-            return redirect()->back()->withErrors(['error' => 'Failed to register admin.'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'Failed to register user.'])->withInput();
         }
     }
 
@@ -68,7 +68,7 @@ class AppController extends Controller
         // Attempt to log in the user
         if (Auth::guard($this->singularizeModel)->attempt(['email' => $request->email, 'password' => $request->password])) {
             // Authentication passed
-            return redirect()->route('admin.index');
+            return redirect()->route('user.index');
         } else {
             // Authentication failed
             return redirect()->back()
