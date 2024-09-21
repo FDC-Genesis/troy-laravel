@@ -12,6 +12,7 @@ class UserFactory extends Factory
     {
         return [
             // Define your model's default state here.
+            'name' => $this->faker->name,
         ];
     }
 }
