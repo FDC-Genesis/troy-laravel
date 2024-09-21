@@ -15,8 +15,8 @@ class MakeC extends Command {
         $user = $this->argument('user');
 
         // Get the path where the file will be saved
-        $path = base_path("entities/{$user}/Controller/{$name}.php");
-        $path2 = "entities/{$user}/Controller/{$name}.php";
+        $path = base_path("entities/Controller/{$user}/{$name}.php");
+        $path2 = "entities/Controller/{$user}/{$name}.php";
         // Ensure the directory exists
         $directory = dirname($path);
         if (!file_exists($directory)) {
@@ -25,7 +25,7 @@ class MakeC extends Command {
 
         // Build the class content
         $controllerClass = class_basename($name);
-        $controllerNamespace = "Entities\\{$user}\\Controller"; // Correct namespace
+        $controllerNamespace = "Entities\\Controller\\{$user}"; // Correct namespace
         $stub = file_get_contents(base_path('stubs/Controller/default-controller.stub'));
 
         // Replace placeholders in the stub

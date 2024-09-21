@@ -17,7 +17,7 @@ class CustomMakeModel extends Command
         $user = $this->argument('user');
 
         // Define the path where the model will be saved
-        $path = base_path("entities/{$user}/Model/{$name}.php");
+        $path = base_path("entities/Model/{$name}.php");
 
         // Ensure the directory exists
         if (!File::exists(dirname($path))) {
