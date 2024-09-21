@@ -3,8 +3,10 @@
 namespace {{ namespace }};
 
 use Core\Model\AppModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class {{ class }} extends AppModel
 {
     // Add your additional properties and methods here
+    use HasFactory;
 }
