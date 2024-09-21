@@ -3,26 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Routing\Console\ControllerMakeCommand;
-use Symfony\Component\Console\Input\InputArgument;
 
 class MakeC2 extends ControllerMakeCommand
 {
-    protected $name = 'make:controller-v3';
+    protected $signature = 'make:controller-v3 {name} {user}';  // Correct signature
     protected $description = 'Create a new controller version 3';
     protected $type = 'Controller';
 
     protected function getStub()
     {
-        // Point to a custom stub if you have one, otherwise use Laravel's default
-        return base_path('stubs/Controller/resource-controller.stub');
+        return base_path('stubs/Controller/resource-controller.stub');  // Custom stub path
     }
 
     protected function getPath($name)
     {
         // Get the 'user' argument
         $user = $this->argument('user');
-        // Ensure the correct path structure
-        return base_path("entities/{$user}/Controller/{$name}.php");
+        return base_path("entities/{$user}/Controller/{$name}.php");  // Ensure correct path structure
     }
 
     protected function buildClass($name)
@@ -40,13 +37,5 @@ class MakeC2 extends ControllerMakeCommand
         return str_replace(
             array_keys($replace), array_values($replace), parent::buildClass($name)
         );
-    }
-
-    protected function getArguments()
-    {
-        return [
-            ['controller-name', InputArgument::REQUIRED, 'The name of the controller'],
-            ['user', InputArgument::REQUIRED, 'The user directory to place the controller in'],
-        ];
     }
 }
