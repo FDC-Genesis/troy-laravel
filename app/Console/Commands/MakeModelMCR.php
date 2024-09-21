@@ -35,14 +35,12 @@ class MakeModelMCR extends Command
                     if (in_array('r', $options)){
                         echo $user;
                         // Create a resource controller
-                        $this->call("make:c2", [
+                        $this->call("make:controller-v3", [
                             'user' => $user, // Pass the type as user
                             'name' => $name . 'Controller',
-                            '--resource' => true,
-                            '--model' => $name,
                         ]);
                     } else {
-                        $this->call("make:c", [
+                        $this->call("make:controller-v2", [
                             'name' => $name . 'Controller',
                             'user' => $user, // Pass the type as user
                         ]);

@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Core\Model\Admin\AppModel;
+use Core\Model\{{ type }}\AppModel;
 
 class {{ class }} extends AppModel
 {
