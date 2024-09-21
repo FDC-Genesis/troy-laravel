@@ -51,8 +51,7 @@ class AdminController extends AppController
     }
 
     public function login(){
-
-        return view('Admin.login');
+        return view('Admin.login', ['type'=>$this->singularizeModel]);
     }
 
 }

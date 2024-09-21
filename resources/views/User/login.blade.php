@@ -1,3 +1,3 @@
-<x-app-layout :title="$title ?? 'Document'">
-    Yow
+<x-app-layout :title="'Login'">
+    <x-login-layout :type="$type" />
 </x-app-layout>

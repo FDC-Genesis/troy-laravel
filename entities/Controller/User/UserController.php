@@ -18,7 +18,7 @@ class UserController extends AppController
 
     public function create()
     {
-        // Show the form for creating a new resource
+        return view('User.register', ['type'=>$this->singularizeModel]);
     }
 
     public function store(Request $request)
@@ -47,6 +47,6 @@ class UserController extends AppController
     }
 
     public function login(){
-        return view('User.login');
+        return view('User.login', ['type'=>$this->singularizeModel]);
     }
 }

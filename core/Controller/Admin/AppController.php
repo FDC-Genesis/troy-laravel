@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Validator;
 class AppController extends Controller
 {
     //
-    private $modelUsed;
-    private $pluralizeModel;
-    private $singularizeModel;
+    protected $modelUsed;
+    protected $pluralizeModel;
+    protected $singularizeModel;
     
     public function __construct()
     {
