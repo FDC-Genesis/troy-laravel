@@ -5,17 +5,29 @@
                 {{ session('success') }}
             </div>
         @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="col-md-4 mt-5">
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Login</h3>
                     <form action="{{ route("{$type}.login") }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
                         <!-- Email Input -->
-                         @csrf
-                         @method('PUT')
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
                         </div>
 
                         <!-- Password Input -->
@@ -26,7 +38,7 @@
 
                         <!-- Remember Me Checkbox -->
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">Remember Me</label>
                         </div>
 

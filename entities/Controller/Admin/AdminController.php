@@ -5,15 +5,15 @@ namespace Entities\Controller\Admin;
 use Core\Controller\Admin\AppController;
 use Entities\Model\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends AppController
 {
     public function index()
     {
         // Display a listing of the resource
-        $admins = Admin::all();
-
-        dd($admins);
+        $onlineTime = Auth::user()->last_online;
+        dd($onlineTime);
     }
 
     public function create()

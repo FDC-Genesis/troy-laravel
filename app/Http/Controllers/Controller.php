@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class Controller extends BaseController
 {
@@ -36,5 +37,6 @@ class Controller extends BaseController
         $ucFirst = ucfirst($modelName);
         $model = eval("new $ucFirst()");
         $model->where('id', Auth::guard($modelName)->id())->update(['last_online' => now()]);
+        Auth::guard($modelName)->last_online = Date("Y-m-d H:i:s");
     }
 }
