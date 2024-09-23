@@ -6,19 +6,19 @@
         <title>{{ $title ? $title : 'Document' }}</title>
     
         <!-- Bootstrap 5 CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('libs/css/bootstrap-5.3.3.css') }}" rel="stylesheet">
     
         <!-- DataTables CSS -->
-        <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="{{ asset('libs/css/datatables-1.13.css') }}" rel="stylesheet">
     
         <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('libs/js/jquery-3.7.1.js') }}"></script>
     
         <!-- Bootstrap 5 JS Bundle -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+        <script src="{{ asset('libs/js/bootstrap-5.3.3.js') }}"></script>
     
         <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="{{ asset('libs/js/datatables-1.13.js') }}"></script>
     </head>
     
     <body>
