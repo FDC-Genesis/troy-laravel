@@ -17,7 +17,7 @@ class AppController extends Controller
     
     public function __construct()
     {
-        $this->modelUsed = new User();
+        $this->modelUsed = User::class;
         [$this->pluralizeModel, $this->singularizeModel] = $this->getTableName($this->modelUsed);
     }
 
@@ -32,7 +32,6 @@ class AppController extends Controller
         if ($validator->fails()) {
             // Handle validation failure
             $errors = $validator->errors();
-            dd($errors);
             return redirect()->back()
                 ->withErrors($errors)
                 ->withInput();

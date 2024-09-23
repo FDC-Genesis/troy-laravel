@@ -28,15 +28,26 @@ class Controller extends BaseController
     }
 
     protected function lastLogout($modelName){
-        $ucFirst = ucfirst($modelName);
-        $model = eval("new $ucFirst()");
-        $model->where('id', Auth::guard($modelName)->id())->update(['last_offline' => now()]);
+
     }
 
-    protected function lastLoggedIn($modelName){
-        $ucFirst = ucfirst($modelName);
-        $model = eval("new $ucFirst()");
-        $model->where('id', Auth::guard($modelName)->id())->update(['last_online' => now()]);
-        Auth::guard($modelName)->last_online = Date("Y-m-d H:i:s");
+    protected function lastLoggedIn($modelName)
+    {
+        // Dynamically resolve the model name using the correct namespace
+        $modelClass = MODEL_DIR . ucfirst($modelName);
+    
+        if (class_exists($modelClass)) {
+            // Get the authenticated user from the specified guard
+            $user = Auth::guard($modelName)->user();
+    
+            if ($user) {
+                // Instantiate the model class and update the last_online field
+                $model = new $modelClass();
+                $model->where('id', $user->id)->update(['last_online' => now()]);
+    
+                // Optionally update the Auth user's in-memory last_online timestamp (if needed)
+                $user->last_online = now();
+            }
+        }
     }
 }

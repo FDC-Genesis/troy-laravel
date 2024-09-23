@@ -1,18 +1,9 @@
 <div class="container">
     <div class="row justify-content-center">
+        <!-- Success Message -->
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
             </div>
         @endif
 
@@ -27,18 +18,46 @@
                         <!-- Email Input -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                            <input 
+                                type="email" 
+                                class="form-control @error('email') is-invalid @enderror" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email" 
+                                value="{{ old('email') }}" 
+                                required>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <!-- Password Input -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            <input 
+                                type="password" 
+                                class="form-control @error('password') is-invalid @enderror" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password" 
+                                required>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <!-- Remember Me Checkbox -->
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <input 
+                                type="checkbox" 
+                                class="form-check-input @error('remember') is-invalid @enderror" 
+                                id="remember" 
+                                name="remember" 
+                                {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">Remember Me</label>
                         </div>
 

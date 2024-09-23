@@ -11,15 +11,14 @@ class AdminController extends AppController
 {
     public function index()
     {
-        // Display a listing of the resource
-        $onlineTime = Auth::user()->last_online;
-        dd($onlineTime);
+        
     }
 
     public function create()
     {
+        $type = $this->singularizeModel;
         // Show the form for creating a new resource
-        return view('Admin.register');
+        return view('Admin.register', compact('type'));
     }
 
     public function store(Request $request) {
