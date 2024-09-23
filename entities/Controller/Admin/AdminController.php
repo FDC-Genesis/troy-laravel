@@ -11,7 +11,7 @@ class AdminController extends AppController
 {
     public function index()
     {
-        
+
     }
 
     public function create()
@@ -53,7 +53,7 @@ class AdminController extends AppController
         return view('Admin.login', ['type'=>$this->singularizeModel]);
     }
 
-    public function logout(){
-        return parent::logout();
+    public function logoutChild(){
+        return parent::logout($this->singularizeModel);
     }
 }

@@ -76,9 +76,4 @@ class AppController extends Controller
                 ->withInput(); // Preserve old input
         }
     }    
-
-    public function logout(){
-        Auth::guard($this->singularizeModel)->logout();
-        return redirect()->route("{$this->singularizeModel}.signin");
-    }
 }

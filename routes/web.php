@@ -38,9 +38,9 @@ Route::group($adminRoute['guest'], function () {
 });
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AdminController::class, 'logoutChild'])->name('logout');
 });
 
 Route::group(['prefix' => ''], function(){
-    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('/logout', [UserController::class, 'logoutChild'])->name('logout');
 });

@@ -50,4 +50,9 @@ class Controller extends BaseController
             }
         }
     }
+
+    public function logout($modelName) {
+        Auth::guard($modelName)->logout();
+        return redirect()->route("{$modelName}.signin");
+    }
 }

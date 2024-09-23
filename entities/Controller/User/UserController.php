@@ -52,7 +52,7 @@ class UserController extends AppController
         return view('User.login', ['type'=>$this->singularizeModel]);
     }
 
-    public function logout(){
-        return parent::logout();
+    public function logoutChild(){
+        return parent::logout($this->singularizeModel);
     }
 }
